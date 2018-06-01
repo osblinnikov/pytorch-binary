@@ -1,3 +1,5 @@
+*.iml
+.idea
 # Byte-compiled / optimized / DLL files
 _ext
 *.so

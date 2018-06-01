@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 
-from modules.add import MyAddModule
+from modules.andor import MyAddModule
 
 class MyNetwork(nn.Module):
     def __init__(self):
