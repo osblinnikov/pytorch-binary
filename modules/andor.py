@@ -1,6 +1,6 @@
 from torch.nn.modules.module import Module
-from functions.andor import MyAddFunction
+from functions.andor import AndOrFunction
 
-class MyAddModule(Module):
+class AndOrModule(Module):
     def forward(self, input1, input2):
-        return MyAddFunction()(input1, input2)
+        return AndOrFunction()(input1, input2)

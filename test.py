@@ -2,15 +2,15 @@ import torch
 import torch.nn as nn
 from torch.autograd import Variable
 
-from modules.andor import MyAddModule
+from modules.andor import AndOrModule
 
 class MyNetwork(nn.Module):
     def __init__(self):
         super(MyNetwork, self).__init__()
-        self.add = MyAddModule()
+        self.andor = AndOrModule()
 
     def forward(self, input1, input2):
-        return self.add(input1, input2)
+        return self.andor(input1, input2)
 
 model = MyNetwork()
 x = torch.range(1, 25).view(5, 5)
