@@ -10,13 +10,5 @@ class AndOrFunction(Function):
         if not input1.is_cuda:
             andor.andor_forward(input1, input2, output)
         else:
-            andor.andor_forward_cuda(input1, input2, output)
+            andor.andor_forward_cuda(input1, input2, output, input1.size()[0], input2.size()[0])
         return output
-
-    def backward(self, grad_output):
-        grad_input = grad_output.new()
-        if not grad_output.is_cuda:
-            andor.andor_backward(grad_output, grad_input)
-        else:
-            andor.andor_backward_cuda(grad_output, grad_input)
-        return grad_input
