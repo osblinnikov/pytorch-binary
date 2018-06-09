@@ -19,12 +19,22 @@ int andor_forward_cuda(
 		        )
 */
 
-int andor_forward_cuda(THCudaTensor *a_tensor, THCudaTensor *b_tensor,
-		       THCudaTensor *output, int x, int y)
+int andor_forward_cuda(THCudaTensor *a_tensor, THCudaTensor *b_tensor, THCudaTensor *output)
 {
 //  if (!THCudaTensor_isSameSizeAs(state, input1, input2))
 //    return 0;
-//  THCudaTensor_resizeAs(state, output, input1);
+  int dimsAx = THCudaTensor_size(state, a_tensor, 1);
+  int dimsAy = THCudaTensor_size(state, a_tensor, 0);
+  int dimsBx = THCudaTensor_size(state, b_tensor, 1);
+  int dimsBy = THCudaTensor_size(state, b_tensor, 0);
+
+  if (dimsAx != dimsBy) {
+      printf("Error: outer matrix dimensions must be equal. (%d != %d)\n",
+             dimsAx, dimsBy);
+      exit(EXIT_FAILURE);
+  }
+
+  THCudaTensor_resize2d(state, output, dimsAy, dimsBx);
 //  THCudaTensor_cadd(state, output, input1, 1.0, input2);
 //
   float *a = THCudaTensor_data(state, a_tensor);
@@ -32,7 +42,7 @@ int andor_forward_cuda(THCudaTensor *a_tensor, THCudaTensor *b_tensor,
   float *c = THCudaTensor_data(state, output);
   cudaStream_t stream = THCState_getCurrentStream(state);
 
-  andor_cuda(c, a, b, x, y, stream);
+  andor_cuda(c, a, b, dimsAx, dimsAy, dimsBx, dimsBy, stream);
 
   return 1;
 }

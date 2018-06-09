@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 
-void andor_cuda(float *c, float *a, float *b, int x, int y, cudaStream_t stream);
+void andor_cuda(float *c, float *a, float *b, int dimsAx, int dimsAy, int dimsBx, int dimsBy, cudaStream_t stream);
 
 #ifdef __cplusplus
 }

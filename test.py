@@ -13,12 +13,16 @@ class TestNetwork(nn.Module):
         return self.andor(input1, input2)
 
 model = TestNetwork()
-x = torch.range(1, 25).view(5, 5)
-input1, input2 = Variable(x), Variable(x * 4)
+x = torch.range(1, 4).view(2, 2)
+y = torch.range(1, 6).view(2, 3)
+input1, input2 = Variable(x), Variable(y * 4)
 # print(model(input1, input2))
 # print(input1 + input2)
 
 if torch.cuda.is_available():
     input1, input2, = input1.cuda(), input2.cuda()
-    print(model(input1, input2))
-    # print(input1 + input2)
+    print(input1)
+    print(input2)
+    print("matmul:", torch.matmul(input1, input2))
+    res = model(input1, input2)
+    print("model:", res, res.size())
