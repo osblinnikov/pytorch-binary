@@ -21,8 +21,6 @@ int andor_forward_cuda(
 
 int andor_forward_cuda(THCudaTensor *a_tensor, THCudaTensor *b_tensor, THCudaTensor *output)
 {
-//  if (!THCudaTensor_isSameSizeAs(state, input1, input2))
-//    return 0;
   int dimsAx = THCudaTensor_size(state, a_tensor, 1);
   int dimsAy = THCudaTensor_size(state, a_tensor, 0);
   int dimsBx = THCudaTensor_size(state, b_tensor, 1);
@@ -35,8 +33,7 @@ int andor_forward_cuda(THCudaTensor *a_tensor, THCudaTensor *b_tensor, THCudaTen
   }
 
   THCudaTensor_resize2d(state, output, dimsAy, dimsBx);
-//  THCudaTensor_cadd(state, output, input1, 1.0, input2);
-//
+
   float *a = THCudaTensor_data(state, a_tensor);
   float *b = THCudaTensor_data(state, b_tensor);
   float *c = THCudaTensor_data(state, output);

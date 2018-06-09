@@ -16,8 +16,6 @@ model = TestNetwork()
 x = torch.range(1, 4).view(2, 2)
 y = torch.range(1, 6).view(2, 3)
 input1, input2 = Variable(x), Variable(y * 4)
-# print(model(input1, input2))
-# print(input1 + input2)
 
 if torch.cuda.is_available():
     input1, input2, = input1.cuda(), input2.cuda()
