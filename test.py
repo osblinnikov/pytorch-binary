@@ -13,9 +13,9 @@ class TestNetwork(nn.Module):
         return self.andor(input1, input2)
 
 model = TestNetwork()
-x = torch.range(1, 4).view(2, 2)
-y = torch.range(1, 6).view(2, 3)
-input1, input2 = Variable(x), Variable(y * 4)
+x = torch.range(1, 32*2).view(2, 32)
+y = torch.range(1, 32*4).view(32, 4)
+input1, input2 = Variable(x / 4), Variable(y / 6)
 
 if torch.cuda.is_available():
     input1, input2, = input1.cuda(), input2.cuda()
